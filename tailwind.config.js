@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js}"],
+  darkMode: "class",
   theme: {
     screens: {
       xxs: "50px",
@@ -8,18 +9,27 @@ module.exports = {
       sm: "640px",
       md: "768px",
       lg: "1024px",
-      xl: "1280px"
+      xl: "1280px",
+      mobile: { max: "650px" },
+      tablet: { min: "651px", max: "935px" },
+      desktop: { min: "936px" }
     },
     extend: {
       colors: {
         brandColor: "#228920",
-
-        secondaryColor: "#212121"
+        primaryColor: "#EA6E31",
+        secondaryColor: "#212121",
+        bgColor: {
+          light: "#FAF7F0",
+          dark: "#181818"
+        }
       },
       fontFamily: {
-        "public-sans": ["Public Sans", "sans"],
-        lightBasicH3: ["Public Sans", "sans"],
-        lightBasicParagraph: ["Public Sans", "sans"]
+        "dunbar-tall": ["DunbarTall", "sans-serif"],
+        "dunbar-text": ["DunbarText", "sans-serif"]
+        // "public-sans": ["Public Sans", "sans"],
+        // lightBasicH3: ["Public Sans", "sans"],
+        // lightBasicParagraph: ["Public Sans", "sans"]
       },
       fontSize: {
         lightBasicParagraph: "0.9375rem",
@@ -155,6 +165,62 @@ module.exports = {
             src: `url('/public/fonts/Montserrat-Bold.ttf') format('truetype')`,
             fontWeight: "700",
             fontStyle: "bold"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarTall",
+            src: `url('/public/fonts/DunbarTall-Book.ttf') format('truetype')`,
+            fontWeight: "300",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarTall",
+            src: `url('/public/fonts/DunbarTall-Regular.ttf') format('truetype')`,
+            fontWeight: "400",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarTall",
+            src: `url('/public/fonts/DunbarTall-Medium.ttf') format('truetype')`,
+            fontWeight: "500",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarTall",
+            src: `url('/public/fonts/DunbarTall-Bold.ttf') format('truetype')`,
+            fontWeight: "700",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarText",
+            src: `url('/public/fonts/DunbarText-Regular.ttf') format('truetype')`,
+            fontWeight: "400",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarText",
+            src: `url('/public/fonts/DunbarText-Medium.ttf') format('truetype')`,
+            fontWeight: "500",
+            fontStyle: "normal"
+          }
+        },
+        {
+          "@font-face": {
+            fontFamily: "DunbarText",
+            src: `url('/public/fonts/DunbarText-Bold.ttf') format('truetype')`,
+            fontWeight: "700",
+            fontStyle: "normal"
           }
         }
       ]);

@@ -1,8 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "public-sans", sans-serif;
+  font-family: "DunbarTall", "sans-serif";
+}
+
+.yelow-stars {
+  mask-image: url(../images/Three-stars.svg);
+  width: 93px;
+  height: 93px;
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  background-color: #FEF371;
+}
+
+.violet-stars {
+  mask-image: url(../images/Three-stars.svg);
+  width: 60px;
+  height: 60px;
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  background-color: #8471FE;
 }
