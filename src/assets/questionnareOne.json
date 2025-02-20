@@ -1,0 +1,22 @@
+[
+    {
+        "key": "name",
+        "question": "What is your name?",
+        "description": "Please enter your full name"
+    },
+    {
+        "key": "age",
+        "question": "What is your age?",
+        "description": "Please enter your age"
+    },
+    {
+        "key": "extravert",
+        "question": "Are you an extravert?",
+        "description": "Please select the option that best describes you"
+    },
+    {
+        "key": "introvert",
+        "question": "Are you an introvert?",
+        "description": "Please select the option that best describes you"
+    }
+]
