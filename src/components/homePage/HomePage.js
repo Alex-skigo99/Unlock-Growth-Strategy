@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 
 import womanPlaying from "../../assets/images/Woman_playing.png";
 import hearts from "../../assets/images/hearts.svg";
@@ -16,13 +15,15 @@ import whoWeAre from "../../assets/images/who-we-are.svg";
 import Header from "../widgets/Header";
 import Footer from "../widgets/Footer";
 import { SampleResultButton, SurveyButton } from "../widgets/Buttons";
+import ModalVerifyOwnership from "./ModalVerifyOwnership";
 
 const HomePage = () => {
   const sectionWhyRef = useRef(null);
   const sectionHowRef = useRef(null);
   const sectionWhatRef = useRef(null);
   const sectionWhoRef = useRef(null);
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [youtubeChannelLink, setYoutubeChannelLink] = useState("");
 
   const scrollToSection = (section) => {
     section.current?.scrollIntoView({ behavior: "smooth" });
@@ -33,7 +34,7 @@ const HomePage = () => {
       <Header>
         <div className="flex gap-4 items-center">
           <div className="text-[16px] font-bold italic">Start here 👉🏼</div>
-          <SurveyButton />
+          <SurveyButton onClick={() => setIsModalOpen(true)} />
         </div>
       </Header>
 
@@ -47,7 +48,7 @@ const HomePage = () => {
               reach!
             </div> */}
             <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-              <SurveyButton />
+              <SurveyButton onClick={() => setIsModalOpen(true)} />
               <SampleResultButton extraClass="border-White text-white" />
             </div>
           </div>
@@ -91,7 +92,7 @@ const HomePage = () => {
             Our test is based on the Big 5 Personality Model, a widely recognized psychological framework for understanding human behavior.
           </div>
           <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-            <SurveyButton />
+            <SurveyButton onClick={() => setIsModalOpen(true)} />
             <SampleResultButton extraClass="border-White text-white" />
           </div>
         </div>
@@ -113,19 +114,14 @@ const HomePage = () => {
             Ready to understand your content creation personality and improve your reach?
           </div>
           <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-            <SurveyButton extraClass="bg-bgColor-dark" />
+            <SurveyButton extraClass="bg-bgColor-dark" onClick={() => setIsModalOpen(true)} />
             <SampleResultButton extraClass="border-black text-black" />
           </div>
         </div>
       </div>
       <Footer>
         <div className="flex gap-8 mobile:flex-wrap mobile:gap-4 mobile:justify-end">
-          <button
-            className="text-[#FFBBF5] hover:text-[#FEF371]"
-            onClick={() => {
-              navigate("/survey");
-            }}
-          >
+          <button className="text-[#FFBBF5] hover:text-[#FEF371]" onClick={() => setIsModalOpen(true)}>
             Take free test
           </button>
           <button className="hover:text-[#FEF371]" onClick={() => scrollToSection(sectionWhyRef)}>
@@ -142,6 +138,12 @@ const HomePage = () => {
           </button>
         </div>
       </Footer>
+      <ModalVerifyOwnership
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        youtubeChannelLink={youtubeChannelLink}
+        setYoutubeChannelLink={setYoutubeChannelLink}
+      />
     </div>
   );
 };

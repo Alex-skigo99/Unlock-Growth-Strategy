@@ -11,17 +11,8 @@ export const CustomButton = ({ title = "Click", onClick, extraClass = "bg-primar
   );
 };
 
-export const SurveyButton = ({ extraClass }) => {
-  const navigate = useNavigate();
-  return (
-    <CustomButton
-      title="Take free test"
-      extraClass={extraClass}
-      onClick={() => {
-        navigate("/survey");
-      }}
-    />
-  );
+export const SurveyButton = ({ extraClass, onClick }) => {
+  return <CustomButton title="Take free test" extraClass={extraClass} onClick={onClick} />;
 };
 
 export const SampleResultButton = ({ extraClass }) => {

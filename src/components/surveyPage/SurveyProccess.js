@@ -104,7 +104,7 @@ const SurveyProccess = ({ questionnare, isStyleColor, theme, isFirstQuestionnare
       </div>
       <div className="w-full flex">
         {questionnare.map((question, index) => (
-          <div key={`${index}line`} className="h-1 px-1 mobile:px-[2px]" style={{ width: `${widthOfLine}%` }}>
+          <div key={`${index}line`} className="h-1 px-[.2%] mobile:px-[2px]" style={{ width: `${widthOfLine}%` }}>
             <div
               className={`h-[5px] w-full ${
                 index < currentQuestion ? "bg-[#8471FE] dark:bg-[#FEF371]" : "bg-[#00000066] dark:bg-[#FFFFFF66]"
