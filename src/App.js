@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import MyComponent from "./components/myComponent/MyComponent.js";
 import HomePage from "./components/homePage/HomePage.js";
 import SurveyPage from "./components/surveyPage/SurveyPage.js";
+import ResultSamplePage from "./components/resultPage/ResultSamplePage.js";
 
 function App() {
   localStorage.setItem("theme", "light");
@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/survey" element={<SurveyPage />} />
-      <Route path="/result" element={<MyComponent />} />
+      <Route path="/result" element={<ResultSamplePage />} />
     </Routes>
   );
 }
