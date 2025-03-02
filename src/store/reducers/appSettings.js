@@ -10,6 +10,9 @@ export const appSettings = createSlice({
     setLoaderOn: (state) => {
       state.isLoaderOn = true;
     },
+    setLoaderOff: (state) => {
+      state.isLoaderOn = false;
+    },
     setIsMobile: (state, action) => {
       state.isMobile = action.payload;
     }

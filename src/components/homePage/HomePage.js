@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-
+import { useRef, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import womanPlaying from "../../assets/images/Woman_playing.png";
 import hearts from "../../assets/images/hearts.svg";
 import manWithPhone from "../../assets/images/man-with-a-phone.png";
@@ -11,22 +11,45 @@ import howItWorks from "../../assets/images/how-it-works.svg";
 import whatYouWillDiscover from "../../assets/images/What-you-will-discover.png";
 import fourPic from "../../assets/images/4-pictures.png";
 import whoWeAre from "../../assets/images/who-we-are.svg";
-
 import Header from "../widgets/Header";
 import Footer from "../widgets/Footer";
 import { SampleResultButton, SurveyButton } from "../widgets/Buttons";
-import ModalVerifyOwnership from "./ModalVerifyOwnership";
+import { surveyService } from "../../services/surveyService";
 
 const HomePage = () => {
   const sectionWhyRef = useRef(null);
   const sectionHowRef = useRef(null);
   const sectionWhatRef = useRef(null);
   const sectionWhoRef = useRef(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [youtubeChannelLink, setYoutubeChannelLink] = useState("");
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const email = queryParams.get("email") || "";
+  const link = queryParams.get("link") || "";
+  localStorage.setItem("link", link);
+
+  useEffect(() => {
+    const createSurvey = async () => {
+      if (localStorage.getItem("isSurveyCreated") !== "true") {
+        const response = await surveyService.createSurvey(email, link);
+        if (response.status === 201) {
+          localStorage.setItem("isSurveyCreated", "true");
+          localStorage.setItem("surveyId", response.data._id);
+          return;
+        }
+        localStorage.removeItem("isSurveyCreated");
+      }
+    };
+
+    createSurvey();
+  }, [email, link]);
 
   const scrollToSection = (section) => {
     section.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSurveyButtonClick = () => {
+    navigate("/survey");
   };
 
   return (
@@ -34,7 +57,7 @@ const HomePage = () => {
       <Header>
         <div className="flex gap-4 items-center">
           <div className="text-[16px] font-bold italic">Start here 👉🏼</div>
-          <SurveyButton onClick={() => setIsModalOpen(true)} />
+          <SurveyButton onClick={handleSurveyButtonClick} />
         </div>
       </Header>
 
@@ -42,13 +65,8 @@ const HomePage = () => {
         <div className="flex w-full justify-between items-center bg-bgColor-dark text-bgColor-light rounded-[30px] p-16 mobile:p-4">
           <div className="flex flex-col gap-8 justify-center w-[55%]">
             <img src={unlockYourYoutube} alt="text" className="" />
-            {/* <div className="text-[80px] font-bold">Unlock Your YouTube Growth Strategy🚀</div>
-            <div className="text-[18px]">
-              Take our quick personality-based content creator test to discover your strengths, understand your audience, and grow your
-              reach!
-            </div> */}
             <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-              <SurveyButton onClick={() => setIsModalOpen(true)} />
+              <SurveyButton onClick={handleSurveyButtonClick} />
               <SampleResultButton extraClass="border-White text-white" />
             </div>
           </div>
@@ -92,7 +110,7 @@ const HomePage = () => {
             Our test is based on the Big 5 Personality Model, a widely recognized psychological framework for understanding human behavior.
           </div>
           <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-            <SurveyButton onClick={() => setIsModalOpen(true)} />
+            <SurveyButton onClick={handleSurveyButtonClick} />
             <SampleResultButton extraClass="border-White text-white" />
           </div>
         </div>
@@ -114,14 +132,14 @@ const HomePage = () => {
             Ready to understand your content creation personality and improve your reach?
           </div>
           <div className="flex gap-4 mobile:flex-col mobile:gap-2 w-fit">
-            <SurveyButton extraClass="bg-bgColor-dark" onClick={() => setIsModalOpen(true)} />
+            <SurveyButton extraClass="bg-bgColor-dark" onClick={handleSurveyButtonClick} />
             <SampleResultButton extraClass="border-black text-black" />
           </div>
         </div>
       </div>
       <Footer>
         <div className="flex gap-8 mobile:flex-wrap mobile:gap-4 mobile:justify-end">
-          <button className="text-[#FFBBF5] hover:text-[#FEF371]" onClick={() => setIsModalOpen(true)}>
+          <button className="text-[#FFBBF5] hover:text-[#FEF371]" onClick={handleSurveyButtonClick}>
             Take free test
           </button>
           <button className="hover:text-[#FEF371]" onClick={() => scrollToSection(sectionWhyRef)}>
@@ -138,12 +156,6 @@ const HomePage = () => {
           </button>
         </div>
       </Footer>
-      <ModalVerifyOwnership
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        youtubeChannelLink={youtubeChannelLink}
-        setYoutubeChannelLink={setYoutubeChannelLink}
-      />
     </div>
   );
 };

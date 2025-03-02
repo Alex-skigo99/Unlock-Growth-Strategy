@@ -8,31 +8,31 @@ import Footer from "../widgets/Footer";
 
 const sampleData = [
   {
-    key: "1",
+    key: "creator_type",
     smallTitle: "📷 Creator type",
     title: "Storyteller 📖",
     text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
   },
   {
-    key: "2",
+    key: "superpower",
     smallTitle: "🦸🏼 Superpower",
     title: "Hooking Viewers Instantly ⚡",
     text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
   },
   {
-    key: "3",
+    key: "your_weakness",
     smallTitle: "💔 Your Weakness",
     title: "Struggles with pacing & retention",
     text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
   },
   {
-    key: "4",
+    key: "growth_tip",
     smallTitle: "🚀 Growth Tip",
     title: "Try adding mid-video ‘cliffhangers’ to boost watch time.”",
     text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
   },
   {
-    key: "5",
+    key: "personality",
     title: "Your personality",
     image: (
       <div className="relative bg-[#BBC4FF] w-[400px] h-[400px] min-w-[400px] rounded-[30px] mobile:w-[300px] mobile:h-[300px] mobile:min-w-[300px]">
@@ -42,7 +42,7 @@ const sampleData = [
           alt="your personality"
           className="absolute h-[400px] left-[80px] z-10 mobile:h-[300px] mobile:left-[60px]"
         />
-        <img src={ellipseThree} alt="ellipse" className="absolute rounded-[30px] bottom-0 right-0 z-20" />
+        <img src={ellipseThree} alt="ellipse" className="absolute rounded-[30px] bottom-0 right-0 z-20 mobile:w-[140px]" />
       </div>
     ),
     text: `Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae. Tristique aliquet in sed faucibus egestas bibendum lacinia. Risus lectus lacus faucibus est facilisis nulla potenti vel. Rhoncus venenatis id sollicitudin odio ac pellentesque. Fusce aenean duis nam orci.
@@ -50,7 +50,7 @@ const sampleData = [
 Non lorem arcu commodo a eu tincidunt tincidunt. Sed velit elementum sagittis quis vehicula ultricies hendrerit egestas. Semper justo lorem sem arcu suspendisse nam pellentesque sed. Vel pulvinar maecenas nec ac amet vitae non facilisi.`
   },
   {
-    key: "6",
+    key: "strategy",
     title: "Your growth strategy",
     image: (
       <div className="relative bg-[#FEF371] w-[400px] h-[400px] rounded-[30px] mobile:w-[300px] mobile:h-[300px]">
