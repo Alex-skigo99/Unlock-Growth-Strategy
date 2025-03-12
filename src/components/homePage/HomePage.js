@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import womanPlaying from "../../assets/images/Woman_playing.png";
 import hearts from "../../assets/images/hearts.svg";
@@ -15,34 +15,32 @@ import Header from "../widgets/Header";
 import Footer from "../widgets/Footer";
 import { SampleResultButton, SurveyButton } from "../widgets/Buttons";
 import { surveyService } from "../../services/surveyService";
+import { useQuery } from "@tanstack/react-query";
 
-const HomePage = () => {
+const HomePage = ({ setYoutubeChannelLink }) => {
   const sectionWhyRef = useRef(null);
   const sectionHowRef = useRef(null);
   const sectionWhatRef = useRef(null);
   const sectionWhoRef = useRef(null);
   const navigate = useNavigate();
+
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const email = queryParams.get("email") || "";
   const link = queryParams.get("link") || "";
-  localStorage.setItem("link", link);
+  const surveyId = localStorage.getItem("surveyId");
 
-  useEffect(() => {
-    const createSurvey = async () => {
-      if (localStorage.getItem("isSurveyCreated") !== "true") {
-        const response = await surveyService.createSurvey(email, link);
-        if (response.status === 201) {
-          localStorage.setItem("isSurveyCreated", "true");
-          localStorage.setItem("surveyId", response.data._id);
-          return;
-        }
-        localStorage.removeItem("isSurveyCreated");
-      }
-    };
-
-    createSurvey();
-  }, [email, link]);
+  useQuery({
+    queryKey: ["surveyId"],
+    queryFn: () => {
+      return surveyService.createSurvey(email, link);
+    },
+    enabled: (!surveyId || surveyId === "undefined") && !!email && !!link,
+    onSuccess: (surveyStatus) => {
+      localStorage.setItem("surveyId", surveyStatus.data._id);
+      setYoutubeChannelLink(link);
+    }
+  });
 
   const scrollToSection = (section) => {
     section.current?.scrollIntoView({ behavior: "smooth" });

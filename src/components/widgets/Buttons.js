@@ -22,7 +22,8 @@ export const SampleResultButton = ({ extraClass }) => {
       title="See a sample result"
       extraClass={`bg-opacity-100 border-[1px] ${extraClass}`}
       onClick={() => {
-        navigate("/result");
+        window.scrollTo(0, 0);
+        navigate("/resultSample");
       }}
     />
   );

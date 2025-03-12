@@ -1,23 +1,38 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import Header from "../widgets/Header";
-import { GetStartedButton } from "../widgets/Buttons";
+import { CustomButton } from "../widgets/Buttons";
 import ThemeToggle from "../widgets/ThemeToggle";
 import SurveyProccess from "./SurveyProccess";
 import ModalVerifyOwnership from "./ModalVerifyOwnership";
 import { surveyService } from "../../services/surveyService";
 
-const SurveyPage = ({ questionaireOne, questionaireTwo }) => {
+const SurveyPage = ({ questionaire, youtubeChannelLink, setYoutubeChannelLink }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isStarted, setIsStarted] = useState(false);
-  const [isFirstQuestionnare, setIsFirstQuestionnare] = useState(true);
   const [isModalVerifyOwnershipOpen, setIsModalVerifyOwnershipOpen] = useState(false);
-  // const [youtubeChannelLink, setYoutubeChannelLink] = useState("");
+  const [surveyStatus, setSurveyStatus] = useState({});
+  const navigate = useNavigate();
+  const isSurveyId = !!localStorage.getItem("surveyId") && localStorage.getItem("surveyId") !== "undefined";
+
+  useQuery({
+    queryKey: ["loadSurveyStatus"],
+    queryFn: () => {
+      return surveyService.getSurveyStatus();
+    },
+    enabled: isSurveyId && !isStarted,
+    onSuccess: (surveyStatus) => {
+      setSurveyStatus(surveyStatus);
+      setIsModalVerifyOwnershipOpen(surveyStatus.isSurveyCompleted && !surveyStatus.isChannelLinkConfirmed);
+    }
+  });
+
+  if (!isSurveyId) {
+    return <div className="w-full text-center mt-10">You should start from clicking the link in email</div>;
+  }
 
   const handleEndOfSurvey = (id) => {
-    if (isFirstQuestionnare) {
-      setIsFirstQuestionnare(false);
-      return;
-    }
     surveyService.saveAsCompletedToDB(id);
     return setIsModalVerifyOwnershipOpen(true);
   };
@@ -41,7 +56,12 @@ const SurveyPage = ({ questionaireOne, questionaireTwo }) => {
             personal responses are necessary, as we are analyzing both your personality and your content to provide the best insights
             tailored specifically to you.
           </div>
-          {<GetStartedButton onClick={() => setIsStarted(true)} />}
+          {
+            <CustomButton
+              title={surveyStatus?.currentAnswerNumber === 0 ? "Get started" : "Let continue"}
+              onClick={() => setIsStarted(true)}
+            />
+          }
         </div>
       </div>
     </div>
@@ -52,34 +72,35 @@ const SurveyPage = ({ questionaireOne, questionaireTwo }) => {
       <Header theme={theme}>
         <ThemeToggle theme={theme} setTheme={setTheme} />
       </Header>
-      <div className="px-16 py-8 mobile:p-6">
+      <div className="px-16 py-8 mobile:p-4">
         {!isStarted ? (
           <>
-            {localStorage.getItem("isSurveyCreated") === "true" ? (
+            {!!localStorage.getItem("surveyId") ? (
               getStartedPage
             ) : (
-              <div className="flex justify-center items-center h-[80vh]">
+              <div className="flex flex-col gap-10 justify-center items-center h-[80vh]">
                 <div className="text-[42px] font-bold leading-tight font-dunbar-tall text-center mobile:text-[28px]">
                   You have already completed the survey. Thank you!
                 </div>
+                <CustomButton title="Click to take the survey again" onClick={() => navigate("/")} />
               </div>
             )}
           </>
         ) : (
-          <>
-            {isFirstQuestionnare ? (
-              <SurveyProccess questionnaire={questionaireOne} handleEndOfSurvey={handleEndOfSurvey} />
-            ) : (
-              <SurveyProccess questionnaire={questionaireTwo} isStyleColor={true} theme={theme} handleEndOfSurvey={handleEndOfSurvey} />
-            )}
-          </>
+          <SurveyProccess
+            questionnaire={questionaire}
+            surveyStatus={surveyStatus}
+            isStyleColor={true}
+            theme={theme}
+            handleEndOfSurvey={handleEndOfSurvey}
+          />
         )}
       </div>
       <ModalVerifyOwnership
         isModalOpen={isModalVerifyOwnershipOpen}
         setIsModalOpen={setIsModalVerifyOwnershipOpen}
-        // youtubeChannelLink={youtubeChannelLink}
-        // setYoutubeChannelLink={setYoutubeChannelLink}
+        youtubeChannelLink={youtubeChannelLink}
+        setYoutubeChannelLink={setYoutubeChannelLink}
       />
     </div>
   );

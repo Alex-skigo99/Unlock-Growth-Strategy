@@ -11,6 +11,8 @@ export const endpoints = {
   checkIsTokenValidEndpoint: apiUrlEndpoint + "auth/check-is-logged-in",
 
   //main
-  getQuestionnaire: apiUrlEndpoint + "get-questionnaire",
-  survey: apiUrlEndpoint + "survey"
+  getQuestionnaire: apiUrlEndpoint + "api/get-questionnaire",
+  survey: apiUrlEndpoint + "api/survey",
+  result: apiUrlEndpoint + "api/survey/result",
+  shareEmail: apiUrlEndpoint + "api/survey/share-email"
 };
