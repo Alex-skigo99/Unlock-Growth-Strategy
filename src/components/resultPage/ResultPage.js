@@ -11,34 +11,35 @@ import Header from "../widgets/Header";
 import Footer from "../widgets/Footer";
 import ModalBeforResult from "./ModalBeforResult";
 
-const initData = [
+const sampleData = [
   {
     key: "creator_type",
     smallTitle: "📷 Creator type",
     title: "Storyteller 📖",
-    text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
+    text: "You have a down-to-earth and approachable personality, which makes you relatable to your audience. Your content likely focuses on everyday life, experiences, and conversations."
   },
   {
     key: "superpower",
     smallTitle: "🦸🏼 Superpower",
-    title: "Hooking Viewers Instantly ⚡",
-    text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
+    title: "Building Rapport with Viewers ⚡",
+    text: "Your ability to be yourself and not try to stand out too much helps you build a strong connection with your audience. You're able to create a sense of familiarity and comfort, making viewers feel like they're talking to a friend."
   },
   {
     key: "your_weakness",
     smallTitle: "💔 Your Weakness",
-    title: "Struggles with pacing & retention",
-    text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
+    title: "Struggles with Standing Out",
+    text: "While being relatable is a strength, it can also make it challenging for you to stand out in a crowded online space. You may struggle to differentiate yourself from other creators and make your content truly memorable."
   },
   {
     key: "growth_tip",
     smallTitle: "🚀 Growth Tip",
-    title: "Try adding mid-video ‘cliffhangers’ to boost watch time.”",
-    text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae."
+    title: "Experiment with New Formats and Topics",
+    text: "Try shaking things up by exploring new formats, such as challenges, interviews, or educational content. This can help you attract new viewers and keep your existing audience engaged."
   },
   {
     key: "personality",
-    title: "Your personality",
+    smallTitle: "Your personality",
+    title: "The Down-to-Earth Charmer",
     image: (
       <div className="relative bg-[#BBC4FF] w-[400px] h-[400px] min-w-[400px] rounded-[30px] mobile:w-[300px] mobile:h-[300px] mobile:min-w-[300px]">
         <img src={ellipseFour} alt="ellipse" className="absolute z-0 mobile:h-[300px]" />
@@ -50,28 +51,49 @@ const initData = [
         <img src={ellipseThree} alt="ellipse" className="absolute rounded-[30px] bottom-0 right-0 z-20 mobile:w-[140px]" />
       </div>
     ),
-    text: `Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae. Tristique aliquet in sed faucibus egestas bibendum lacinia. Risus lectus lacus faucibus est facilisis nulla potenti vel. Rhoncus venenatis id sollicitudin odio ac pellentesque. Fusce aenean duis nam orci.
-
-Non lorem arcu commodo a eu tincidunt tincidunt. Sed velit elementum sagittis quis vehicula ultricies hendrerit egestas. Semper justo lorem sem arcu suspendisse nam pellentesque sed. Vel pulvinar maecenas nec ac amet vitae non facilisi.`
+    text: "You're a confident and empowered individual who values comfort and authenticity. You're not afraid to be yourself, even if that means not standing out in a crowd. Your personality is warm and inviting, making you a joy to watch and interact with. You're also reflective and willing to learn from your experiences, which helps you grow both personally and professionally. While you may not be the most flashy or attention-grabbing creator, your relatability and charm make you a beloved figure in your audience's eyes."
   },
   {
     key: "strategy",
-    title: "Your growth strategy",
+    smallTitle: "Your growth strategy",
+    title: "Authenticity and Experimentation",
     image: (
       <div className="relative bg-[#FEF371] w-[400px] h-[400px] rounded-[30px] mobile:w-[300px] mobile:h-[300px]">
         <img src={curveArrowUp} alt="arrow" />
       </div>
     ),
-    text: "Malesuada dignissim netus pharetra in sit condimentum id massa phasellus. Gravida lectus libero at vitae. Tristique aliquet in sed faucibus egestas bibendum lacinia. Risus lectus lacus faucibus est facilisis nulla potenti vel. "
-    //     textTwo: `Malesuada dignissim netus pharetra in sit condimentum id massa phasellus.
-    // Gravida lectus libero at vitae. Tristique aliquet in sed faucibus egestas bibendum lacinia.
-    // Risus lectus lacus faucibus est facilisis nulla potenti vel. `
+    text: "To grow your channel, focus on remaining true to yourself and your values while experimenting with new content formats and topics. This will help you attract new viewers who appreciate your authenticity and unique perspective. Don't be afraid to try new things and take calculated risks – it's okay to step out of your comfort zone and challenge yourself. By doing so, you'll not only grow your audience but also continue to develop as a creator and a person. Remember to stay reflective and open to feedback, using it as an opportunity to learn and improve."
   }
 ];
 
-const ResultPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [resultData, setResultData] = useState(initData);
+const fillResultData = (resultData, resultObtained) => {
+  const updatedData = resultData.map((data) => {
+    if (data.key === "creator_type") {
+      return { ...data, title: resultObtained?.creator_type_headline || "", text: resultObtained?.creator_type_text || "" };
+    }
+    if (data.key === "superpower") {
+      return { ...data, title: resultObtained?.superpower_headline || "", text: resultObtained?.superpower_text || "" };
+    }
+    if (data.key === "your_weakness") {
+      return { ...data, title: resultObtained?.weakness_headline || "", text: resultObtained?.weakness_text || "" };
+    }
+    if (data.key === "growth_tip") {
+      return { ...data, title: resultObtained?.growth_tip_headline || "", text: resultObtained?.growth_tip_text || "" };
+    }
+    if (data.key === "personality") {
+      return { ...data, title: resultObtained?.personality_headline || "", text: resultObtained?.personality_text || "" };
+    }
+    if (data.key === "strategy") {
+      return { ...data, title: resultObtained?.growth_strategy_title || "", text: resultObtained?.growth_strategy_text || "" };
+    }
+    return data;
+  });
+  return updatedData;
+};
+
+const ResultPage = ({ isSamplePage }) => {
+  const [isModalOpen, setIsModalOpen] = useState(!isSamplePage);
+  const [resultData, setResultData] = useState(sampleData);
   const [name, setName] = useState("John");
   const [email, setEmail] = useState("");
   const [isValidated, setIsValidated] = useState(false);
@@ -80,24 +102,13 @@ const ResultPage = () => {
   useQuery({
     queryKey: ["surveyId"],
     queryFn: () => surveyService.getSurveyResult(surveyId),
-    enabled: !!surveyId,
+    enabled: !!surveyId && !isSamplePage,
     onSuccess: (result) => {
-      console.log(result.data);
       localStorage.removeItem("surveyId");
       const name = result.data.youtubersEmail.split("@")[0];
       setName(name.charAt(0).toUpperCase() + name.slice(1));
       if (result.data.result) {
-        setResultData((prevState) => {
-          return prevState.map((data) => {
-            if (data.key === "personality") {
-              return { ...data, text: result.data.result?.YourPersonalityType };
-            }
-            if (data.key === "strategy") {
-              return { ...data, text: result.data.result?.YourGrowthStrategy };
-            }
-            return data;
-          });
-        });
+        setResultData((prevState) => fillResultData(prevState, result.data.result));
       }
     }
   });
@@ -117,7 +128,7 @@ const ResultPage = () => {
 
   return (
     <div className="bg-bgColor-light">
-      <Header />
+      <Header>{isSamplePage && <div className="rounded-xl p-2 text-red-600 border-[1px] border-red-600">Sample result page</div>}</Header>
       <div className="w-full flex flex-col gap-8 px-16 py-8 mobile:p-4 tablet:p-6">
         <div className="text-[32px] font-medium mobile:text-[24px]">{name}, here is your personal Youtube growth strategy 🥳</div>
         <div className="flex gap-6 mobile:flex-col mobile:gap-4">
@@ -143,10 +154,10 @@ const ResultPage = () => {
           <div className="flex gap-16 bg-white p-16 rounded-[30px] w-full mobile:items-center mobile:flex-col mobile:gap-4 mobile:p-4 tablet:flex-col tablet:gap-8 tablet:p-8">
             {data.image && data.image}
             <div className="flex flex-col gap-4 w-3/5 justify-center tablet:w-full mobile:w-full">
+              <div className="text-[16px] italic">{data.smallTitle}</div>
               <div className="text-[32px] font-bold">{data.title}</div>
               <div className="text-[18px] font-light">{data.text || ""}</div>
               <div className="text-[18px] font-light">{data.textTwo || ""}</div>
-              <div className="text-[18px] font-light">{data.textThree || ""}</div>
             </div>
           </div>
         </div>

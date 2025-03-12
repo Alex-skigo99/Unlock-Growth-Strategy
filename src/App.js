@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import HomePage from "./components/homePage/HomePage.js";
 import SurveyPage from "./components/surveyPage/SurveyPage.js";
-import ResultSamplePage from "./components/resultPage/ResultSamplePage.js";
 import ResultPage from "./components/resultPage/ResultPage.js";
 import { questionnaireService } from "./services/questionnaireService.js";
 import { useState } from "react";
@@ -30,8 +29,8 @@ function App() {
           <SurveyPage questionaire={questionaire} youtubeChannelLink={youtubeChannelLink} setYoutubeChannelLink={setYoutubeChannelLink} />
         }
       />
-      <Route path="/resultSample" element={<ResultSamplePage />} />
-      <Route path="/result" element={<ResultPage />} />
+      <Route path="/resultSample" element={<ResultPage isSamplePage={true} />} />
+      <Route path="/result" element={<ResultPage isSamplePage={false} />} />
     </Routes>
   );
 }
