@@ -19,14 +19,14 @@ export const memsList = [
 export const memsStages = [
   {
     key: "memsstage_1",
-    textTitle: "Great job! You've completed 20% of the test! 🎉",
+    textTitle: "Great job! You've completed 17% of the test! 🎉",
     textColorized: "You have a unique creative energy. Your content style already has strengths—soon, you'll learn how to amplify them!",
     textBottom: "Next up: Discover what makes your videos truly engaging. Ready?",
     color: "#FEF371"
   },
   {
     key: "memsstage_2",
-    textTitle: "40% done! 🚀",
+    textTitle: "35% done! 🚀",
     textColorized:
       "YouTubers who deeply understand their audience grow 3x faster. In the next section, you’ll uncover what YOUR viewers love most!",
     textBottom: "Stick with us—you're unlocking game-changing insights!",
@@ -34,14 +34,21 @@ export const memsStages = [
   },
   {
     key: "memsstage_3",
-    textTitle: "Wow, you're 60% finished! Just a little more to go!",
+    textTitle: "Wow, you're 50% finished! Just a little more to go!",
     textColorized: "Want more comments, likes, and shares? Your responses are shaping a custom strategy to increase engagement!",
     textBottom: "Creators like you who complete this test report getting 37% more engagement! Stay with us!",
     color: "#BBC4FF"
   },
   {
     key: "memsstage_4",
-    textTitle: "You're in the final stretch—only 20% left!",
+    textTitle: "Wow, you're 67% finished! Just a little more to go!",
+    textColorized: "Want more comments, likes, and shares? Your responses are shaping a custom strategy to increase engagement!",
+    textBottom: "Creators like you who complete this test report getting 37% more engagement! Stay with us!",
+    color: "#FFBBF5"
+  },
+  {
+    key: "memsstage_5",
+    textTitle: "You're in the final stretch—only 17% left!",
     textColorized:
       "Your personalized YouTube growth plan is almost ready. You’ll get tailored tips to increase views, subscribers, and retention!",
     textBottom: "Finish now and unlock your exclusive strategy!",

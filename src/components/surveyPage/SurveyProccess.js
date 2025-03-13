@@ -15,15 +15,19 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
   const [currentBarInProgress, setCurrentBarInProgress] = useState(surveyStatus.currentAnswerNumber % 5);
   const [amountQuestionsInBlock, setAmountQuestionsInBlock] = useState(Math.min(5, lenghtOfQuestionnare));
   const [isMemOpen, setIsMemOpen] = useState(false);
-  const [memCursor, setMemCursor] = useState(0);
+  const [memCursor, setMemCursor] = useState(Math.floor(surveyStatus.currentAnswerNumber / 5));
   const widthOfLine = 100 / amountQuestionsInBlock;
 
   if (lenghtOfQuestionnare === 0) handleEndOfSurvey(id);
 
   const handleAnswer = (value, index) => {
-    const answer = { question: questionnaire[currentQuestionNumber].question };
+    const answer = {
+      question: questionnaire[currentQuestionNumber].question,
+      isSelfAwareness: questionnaire[currentQuestionNumber].isSelfAwareness
+    };
     if (typeof value === "number") {
       answer.value = value;
+      answer.valueText = answersTypeNumber.filter((item) => item.value === value)[0].answer;
     } else {
       answer.value = index + 1;
       answer.valueText = value;
@@ -77,7 +81,7 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
     </div>
   );
 
-  const colorFullTypeAnswerView = (
+  const fullTypeAnswerView = (
     <div className="flex flex-col gap-8 justify-center text-[20px] mobile:flex-col mobile:gap-6">
       {questionnaire[currentQuestionNumber]?.answers.map((variant, index) => (
         <div key={variant} className="flex gap-4 items-center justify-center">
@@ -179,7 +183,11 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
           <div className="text-[18px] italic text-center py-4 mobile:text-[14px]">
             {questionnaire[currentQuestionNumber]?.description || ""}
           </div>
-          {typeOfAnswers === "full" ? colorFullTypeAnswerView : isStyleColor ? colorShortTypeAnswerView : numberTypeAnswerView}
+          {!questionnaire[currentQuestionNumber]?.isSelfAwareness
+            ? fullTypeAnswerView
+            : isStyleColor
+            ? colorShortTypeAnswerView
+            : numberTypeAnswerView}
         </>
       )}
     </div>

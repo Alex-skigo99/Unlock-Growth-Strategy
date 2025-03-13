@@ -83,23 +83,23 @@ const uiTypesOfAnswers = {
   listOfNumberAnswers: [
     {
       value: 1,
-      answer: "Strongly agree"
+      answer: "Very low"
     },
     {
       value: 2,
-      answer: "Agree"
+      answer: "Low"
     },
     {
       value: 3,
-      answer: "Neutral"
+      answer: "Medium"
     },
     {
       value: 4,
-      answer: "Disagree"
+      answer: "High"
     },
     {
       value: 5,
-      answer: "Strongly disagree"
+      answer: "Very high"
     }
   ]
 };

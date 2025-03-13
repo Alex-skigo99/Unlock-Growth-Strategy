@@ -90,7 +90,7 @@ const SurveyPage = ({ questionaire, youtubeChannelLink, setYoutubeChannelLink })
           <SurveyProccess
             questionnaire={questionaire}
             surveyStatus={surveyStatus}
-            isStyleColor={true}
+            isStyleColor={false}
             theme={theme}
             handleEndOfSurvey={handleEndOfSurvey}
           />

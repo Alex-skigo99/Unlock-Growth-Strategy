@@ -114,8 +114,7 @@ const ResultPage = ({ isSamplePage }) => {
   });
 
   const handleShare = async () => {
-    const result = await surveyService.saveShareEmail(localStorage.getItem("surveyId"), email);
-    console.log(result.data.message);
+    await surveyService.saveShareEmail(localStorage.getItem("surveyId"), email);
     setEmail("");
     setIsValidated(false);
   };
