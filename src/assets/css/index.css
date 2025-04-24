@@ -1,8 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "public-sans", sans-serif;
+  font-family: "DunbarTall", "sans-serif";
+}
+
+.yelow-stars {
+  mask-image: url(../images/Three-stars.svg);
+  width: 93px;
+  height: 93px;
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  background-color: #FEF371;
+}
+
+.violet-stars {
+  mask-image: url(../images/Three-stars.svg);
+  width: 60px;
+  height: 60px;
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  background-color: #8471FE;
+}
+
+.custom-modal .ant-modal-content {
+  @apply bg-[#FAF7F0] rounded-[30px];
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  @apply bg-green-500 border-green-500;
+}
+
+.custom-checkbox:hover .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+}
+
+.custom-checkbox:hover .ant-checkbox .ant-checkbox-inner {
+  border-color: #4CAF50 !important;
 }
