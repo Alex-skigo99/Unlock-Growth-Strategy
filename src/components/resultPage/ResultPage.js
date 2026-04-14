@@ -66,6 +66,10 @@ const sampleData = [
   }
 ];
 
+/**
+ * Fills the sample/result template with real data returned by the AI backend.
+ * Each key in `resultObtained` maps to a card section on the page.
+ */
 const fillResultData = (resultData, resultObtained) => {
   const updatedData = resultData.map((data) => {
     if (data.key === "creator_type") {

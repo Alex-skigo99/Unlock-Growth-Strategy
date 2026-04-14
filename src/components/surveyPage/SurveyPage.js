@@ -8,6 +8,11 @@ import SurveyProcess from "./SurveyProcess";
 import ModalVerifyOwnership from "./ModalVerifyOwnership";
 import { surveyService } from "../../services/surveyService";
 
+/**
+ * Survey shell — guards access (surveyId required), shows get-started intro,
+ * then delegates to <SurveyProcess /> for the actual Q&A flow.
+ * After all questions are answered it opens <ModalVerifyOwnership />.
+ */
 const SurveyPage = ({ questionaire, youtubeChannelLink, setYoutubeChannelLink }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isStarted, setIsStarted] = useState(false);

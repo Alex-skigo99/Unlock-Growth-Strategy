@@ -1,6 +1,17 @@
 import axios from "axios";
 import { endpoints } from "../endpoints";
 
+/**
+ * Survey API service — handles the full lifecycle of a survey instance.
+ *
+ * Flow:
+ *  1. createSurvey     – initialised when youtuber opens the email link (email + channel URL)
+ *  2. saveAnswerToDB   – persists each answer individually (PATCH) for resume support
+ *  3. saveAsCompleted  – marks the survey as finished
+ *  4. saveAsConfirmed  – youtuber confirms channel ownership
+ *  5. getSurveyResult  – fetches the AI-generated personality report
+ *  6. saveShareEmail   – sends the survey link to another creator
+ */
 export const surveyService = {
   createSurvey: async (email, link) => {
     const response = await axios.post(endpoints.survey, { email, link, isWebsiteOpened: true });

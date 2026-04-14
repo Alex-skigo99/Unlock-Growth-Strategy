@@ -28,7 +28,3 @@ export const SampleResultButton = ({ extraClass }) => {
     />
   );
 };
-
-export const GetStartedButton = ({ extraClass, onClick }) => {
-  return <CustomButton title="Get started" extraClass={extraClass} onClick={onClick} />;
-};

@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../widgets/Buttons";
 import { surveyService } from "../../services/surveyService";
 
+/**
+ * Post-survey modal — asks the youtuber to confirm (or edit) the link to
+ * their YouTube channel before the AI result is generated.
+ * Includes a YouTube URL regex validator.
+ */
 const ModalVerifyOwnership = ({ isModalOpen, setIsModalOpen, youtubeChannelLink, setYoutubeChannelLink }) => {
   const [isConfirm, setIsConfirm] = useState(false);
   const [newChannelLink, setNewChannelLink] = useState(youtubeChannelLink);

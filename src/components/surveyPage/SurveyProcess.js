@@ -7,6 +7,14 @@ import { memsList, memsStages } from "../../assets/memsList";
 const answersTypeNumber = uiTypesOfAnswers.listOfNumberAnswers;
 const answersTypeColor = uiTypesOfAnswers.listOfColorsAnswersV2;
 
+/**
+ * Core survey engine — renders one question at a time, handles three answer
+ * formats (color dots, numbered scale, free-choice list) and saves each
+ * response individually to the backend.
+ *
+ * Every 5 questions a motivational "meme" break screen is shown to keep
+ * the user engaged. Progress is tracked via a segmented bar.
+ */
 const SurveyProcess = ({ questionnaire, surveyStatus, isStyleColor, theme, handleEndOfSurvey }) => {
   const id = localStorage.getItem("surveyId");
   const lenghtOfQuestionnaire = questionnaire.length;

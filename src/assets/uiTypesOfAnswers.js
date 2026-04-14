@@ -1,55 +1,6 @@
+// Answer option presets used by SurveyProcess to render different question types
 const uiTypesOfAnswers = {
-  listOfColorsAnswers: [
-    {
-      value: 1,
-      colorDark: "#2A8E5C",
-      colorLight: "#2A8E5C",
-      answer: "Agree",
-      size: "64px"
-    },
-    {
-      value: 2,
-      colorDark: "#2A8E5CB2",
-      colorLight: "#2A8E5CB2",
-      answer: "",
-      size: "56px"
-    },
-    {
-      value: 3,
-      colorDark: "#2A8E5C80",
-      colorLight: "#2A8E5C80",
-      answer: "",
-      size: "48px"
-    },
-    {
-      value: 4,
-      colorDark: "#FFFFFF33",
-      colorLight: "#66666633",
-      answer: "Neutral",
-      size: "36px"
-    },
-    {
-      value: 5,
-      colorDark: "#EA313180",
-      colorLight: "#EA313180",
-      answer: "",
-      size: "48px"
-    },
-    {
-      value: 6,
-      colorDark: "#EA3131B2",
-      colorLight: "#EA3131B2",
-      answer: "",
-      size: "56px"
-    },
-    {
-      value: 7,
-      colorDark: "#EA3131",
-      colorLight: "#EA3131",
-      answer: "Disagree",
-      size: "64px"
-    }
-  ],
+  // Color-coded Likert scale (Agree/Disagree) with themed dot buttons
   listOfColorsAnswersV2: [
     {
       value: 1,

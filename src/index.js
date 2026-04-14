@@ -11,6 +11,14 @@ import store from "./store/store";
 import { queryClientConfig } from "./services/utils";
 import { ConfigProvider } from "antd";
 
+/**
+ * Application bootstrap:
+ *  • Redux Provider — global loader state
+ *  • InterceptorsComponent — axios request/response interceptors + spinner overlay
+ *  • Ant Design ConfigProvider — component library theme
+ *  • React Query — server-state caching (questionnaire, survey status, results)
+ *  • BrowserRouter — SPA routing
+ */
 const queryClient = new QueryClient(queryClientConfig);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

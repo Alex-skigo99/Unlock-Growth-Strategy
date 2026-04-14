@@ -1,7 +1,12 @@
 import { Modal } from "antd";
 import axios from "axios";
 
-const GENERAL_ERR_MSG = "There appears to be a problem right now. Please try again later.";
+/**
+ * Global Axios interceptors:
+ *  • Request  – attaches JWT token, increments active-request counter, shows loader
+ *  • Response – decrements counter, hides loader, shows error modals by HTTP status
+ */
+
 const SESSION_EXPIRED_ERR_MSG = "Session expired: Your session has timed out. Please log in again to continue.";
 const ACCESS_DENIED_ERR_MSG = "Access denied or action doesnt exist";
 const NOT_FOUND_MSG = "Sorry but we didnt find what you were after";
@@ -12,7 +17,7 @@ let isModalNowOpen = false;
 let activeRequests = 0;
 
 const interceptors = {
-  setupInterceptors: (_history, toggleLoader) => {
+  setupInterceptors: (toggleLoader) => {
     axios.interceptors.request.use((config) => {
       if (!config.preventLoading) {
         activeRequests++;
@@ -34,7 +39,7 @@ const interceptors = {
       },
       (err) => {
         toggleLoader(false);
-        const serverErrorMsg = /* err.response?.data?.msg || */ DATA_AVAILABLE_ERR_MSG;
+        const serverErrorMsg = DATA_AVAILABLE_ERR_MSG;
 
         let errorMessage;
         switch (err.response?.status) {
@@ -101,7 +106,6 @@ const interceptors = {
           err.response = { data: { success: false } };
         }
 
-        // TODO - handle errors
         return Promise.reject(err);
       }
     );

@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Global UI state — controls the full-screen loading spinner via axios interceptors
 export const appSettings = createSlice({
   name: "appSettings",
   initialState: {
-    isLoaderOn: false,
-    isMobile: window.innerWidth < 650
+    isLoaderOn: false
   },
   reducers: {
     setLoaderOn: (state) => {
@@ -12,14 +12,10 @@ export const appSettings = createSlice({
     },
     setLoaderOff: (state) => {
       state.isLoaderOn = false;
-    },
-    setIsMobile: (state, action) => {
-      state.isMobile = action.payload;
     }
   }
 });
 
-// Action creators are generated for each case reducer function
-export const { setLoaderOn, setLoaderOff, setIsMobile } = appSettings.actions;
+export const { setLoaderOn, setLoaderOff } = appSettings.actions;
 
 export default appSettings.reducer;

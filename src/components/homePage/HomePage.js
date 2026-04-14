@@ -17,6 +17,13 @@ import { SampleResultButton, SurveyButton } from "../widgets/Buttons";
 import { surveyService } from "../../services/surveyService";
 import { useQuery } from "@tanstack/react-query";
 
+/**
+ * Landing page — marketing sections (Why / How / What / Who) + survey CTA.
+ *
+ * On first visit the URL carries ?email=...&link=... query params from the
+ * invitation email. The component creates a new survey instance via the API
+ * and stores the returned surveyId in localStorage for the rest of the flow.
+ */
 const HomePage = ({ setYoutubeChannelLink }) => {
   const sectionWhyRef = useRef(null);
   const sectionHowRef = useRef(null);

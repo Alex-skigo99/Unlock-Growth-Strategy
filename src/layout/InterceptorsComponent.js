@@ -5,7 +5,12 @@ import { Spin } from "antd";
 
 let isInterceptorInitialized = false;
 
-function InterceptorsComponent({ history, children }) {
+/**
+ * Wraps the app tree to:
+ *  1. Set up axios interceptors once (request loader + error modals)
+ *  2. Render a full-screen Spin overlay while any API request is in-flight
+ */
+function InterceptorsComponent({ children }) {
   const dispatch = useDispatch();
   const isLoaderOn = useSelector((state) => state.appSettings.isLoaderOn);
 
@@ -15,7 +20,7 @@ function InterceptorsComponent({ history, children }) {
   };
 
   if (!isInterceptorInitialized) {
-    interceptors.setupInterceptors(history, toggleLoader);
+    interceptors.setupInterceptors(toggleLoader);
     isInterceptorInitialized = true;
   }
 
