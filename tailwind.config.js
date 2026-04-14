@@ -27,9 +27,6 @@ module.exports = {
       fontFamily: {
         "dunbar-tall": ["DunbarTall", "sans-serif"],
         "dunbar-text": ["DunbarText", "sans-serif"]
-        // "public-sans": ["Public Sans", "sans"],
-        // lightBasicH3: ["Public Sans", "sans"],
-        // lightBasicParagraph: ["Public Sans", "sans"]
       },
       fontSize: {
         lightBasicParagraph: "0.9375rem",

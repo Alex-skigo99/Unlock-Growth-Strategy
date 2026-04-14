@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Header from "../widgets/Header";
 import { CustomButton } from "../widgets/Buttons";
 import ThemeToggle from "../widgets/ThemeToggle";
-import SurveyProccess from "./SurveyProccess";
+import SurveyProcess from "./SurveyProcess";
 import ModalVerifyOwnership from "./ModalVerifyOwnership";
 import { surveyService } from "../../services/surveyService";
 
@@ -87,7 +87,7 @@ const SurveyPage = ({ questionaire, youtubeChannelLink, setYoutubeChannelLink })
             )}
           </>
         ) : (
-          <SurveyProccess
+          <SurveyProcess
             questionnaire={questionaire}
             surveyStatus={surveyStatus}
             isStyleColor={false}

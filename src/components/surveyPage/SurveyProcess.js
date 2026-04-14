@@ -1,24 +1,23 @@
 import { useState } from "react";
 import uiTypesOfAnswers from "../../assets/uiTypesOfAnswers";
 import { surveyService } from "../../services/surveyService";
-import { typeOfAnswers } from "../../config"; // full or short
 import { CustomButton } from "../widgets/Buttons";
 import { memsList, memsStages } from "../../assets/memsList";
 
 const answersTypeNumber = uiTypesOfAnswers.listOfNumberAnswers;
 const answersTypeColor = uiTypesOfAnswers.listOfColorsAnswersV2;
 
-const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, handleEndOfSurvey }) => {
+const SurveyProcess = ({ questionnaire, surveyStatus, isStyleColor, theme, handleEndOfSurvey }) => {
   const id = localStorage.getItem("surveyId");
-  const lenghtOfQuestionnare = questionnaire.length;
+  const lenghtOfQuestionnaire = questionnaire.length;
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(surveyStatus.currentAnswerNumber);
   const [currentBarInProgress, setCurrentBarInProgress] = useState(surveyStatus.currentAnswerNumber % 5);
-  const [amountQuestionsInBlock, setAmountQuestionsInBlock] = useState(Math.min(5, lenghtOfQuestionnare));
+  const [amountQuestionsInBlock, setAmountQuestionsInBlock] = useState(Math.min(5, lenghtOfQuestionnaire));
   const [isMemOpen, setIsMemOpen] = useState(false);
   const [memCursor, setMemCursor] = useState(Math.floor(surveyStatus.currentAnswerNumber / 5));
   const widthOfLine = 100 / amountQuestionsInBlock;
 
-  if (lenghtOfQuestionnare === 0) handleEndOfSurvey(id);
+  if (lenghtOfQuestionnaire === 0) handleEndOfSurvey(id);
 
   const handleAnswer = (value, index) => {
     const answer = {
@@ -34,13 +33,13 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
     }
     surveyService.saveAnswerToDB(id, answer);
 
-    if (currentQuestionNumber === lenghtOfQuestionnare - 1) {
+    if (currentQuestionNumber === lenghtOfQuestionnaire - 1) {
       return handleEndOfSurvey(id);
     }
 
     if (currentBarInProgress === amountQuestionsInBlock - 1) {
       setCurrentBarInProgress(0);
-      setAmountQuestionsInBlock(Math.min(amountQuestionsInBlock, lenghtOfQuestionnare - currentQuestionNumber - 1));
+      setAmountQuestionsInBlock(Math.min(amountQuestionsInBlock, lenghtOfQuestionnaire - currentQuestionNumber - 1));
       setIsMemOpen(true);
     } else {
       setCurrentBarInProgress(currentBarInProgress + 1);
@@ -159,7 +158,7 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
       ) : (
         <>
           <div className="text-[14px] font-dunbar-text text-left mobile:text-[12px]">
-            You're halfway through! <span>{Math.round((currentQuestionNumber / lenghtOfQuestionnare) * 100)}</span>% completed – Unlocking
+            You're halfway through! <span>{Math.round((currentQuestionNumber / lenghtOfQuestionnaire) * 100)}</span>% completed – Unlocking
             insights…
           </div>
           <div className="w-full flex">
@@ -194,4 +193,4 @@ const SurveyProccess = ({ questionnaire, surveyStatus, isStyleColor, theme, hand
   );
 };
 
-export default SurveyProccess;
+export default SurveyProcess;
