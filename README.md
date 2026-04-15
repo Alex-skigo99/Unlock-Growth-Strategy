@@ -39,7 +39,7 @@ src/
 
 - Node.js 16+
 - npm or yarn
-- Backend API running on `http://localhost:9718` (see backend repo)
+- Backend API running on `http://localhost:9718` (see backend repo `https://github.com/Alex-skigo99/API-Unlock-Growth-Strategy`)
 
 ### Setup
 
@@ -66,8 +66,3 @@ Output goes to the `build/` folder, ready for static hosting.
 ```bash
 npm test
 ```
-
-## Related
-
-- [PORTFOLIO.md](PORTFOLIO.md) — project description for portfolio / resume
-- [BACKEND_AI_AGENT.md](BACKEND_AI_AGENT.md) — backend optimization checklist for AI agent
